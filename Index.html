@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accords Majeurs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- script JavaScript récupère tous les blocs .actus-item,lit leur date (data-date),compare à la date du jour,et cache ceux qui sont passés. -->
+
+<!--
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date();
+    const pastItems = [];
+
+    document.querySelectorAll(".actus-item").forEach(article => {
+      const dateStr = article.getAttribute("data-date");
+      const eventDate = new Date(dateStr + "T00:00");
+
+      if (eventDate < today) {
+        article.classList.add("past-event");
+        article.style.display = "none";
+        pastItems.push(article);
+      }
+    });
+
+    const btn = document.getElementById("toggle-past");
+    let visible = false;
+
+    btn.addEventListener("click", () => {
+      visible = !visible;
+
+      pastItems.forEach(item => {
+        item.style.display = visible ? "block" : "none";
+      });
+
+      btn.textContent = visible
+        ? "Masquer les actualités passées"
+        : "Afficher les actualités passées";
+    });
+  });
+</script>
+-->
+
+<!-- script JavaScript récupère tous les blocs .actus-item,lit leur date (data-date),compare à la date du jour,et cache ceux qui sont passés et tri par dates -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date();
+    const container = document.getElementById("actualites");
+
+    const articles = Array.from(container.querySelectorAll(".actus-item"))
+      .map(article => {
+        const dateStr = article.getAttribute("data-date");
+        const date = new Date(dateStr + "T00:00");
+        return { element: article, date: date };
+      });
+
+    // Trie les articles par date croissante
+    articles.sort((a, b) => a.date - b.date);
+    articles.forEach(obj => container.appendChild(obj.element));
+
+    const pastItems = [];
+
+    articles.forEach(obj => {
+      if (obj.date < today) {
+        obj.element.classList.add("past-event");
+        // Ne surtout pas faire style.display = "none"
+        pastItems.push(obj.element);
+      }
+    });
+
+    const btn = document.getElementById("toggle-past");
+    let visible = false;
+
+    btn.addEventListener("click", () => {
+      visible = !visible;
+
+      pastItems.forEach(item => {
+        if (visible) {
+          item.classList.add("visible");
+        } else {
+          item.classList.remove("visible");
+        }
+      });
+
+      btn.textContent = visible
+        ? "Masquer les actualités passées"
+        : "Afficher les actualités passées";
+    });
+  });
+</script>
+
+
+
+
+
+<body>
+
+  <!-- En-tête du site -->
+<header>
+  <img src="logo.png" alt="Logo Accords Majeurs" class="logo">
+  <h1>Accords Majeurs</h1>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li class="has-submenu">
+      <a href="association.html">Association</a>
+      <ul class="submenu">
+        <li><a href="directeur.html">Directeur</a></li>
+        <li><a href="objectifs.html">Objectifs</a></li>
+      </ul>
+    </li>
+    <li><a href="activites.html">Activités collectives</a></li>
+    <li><a href="musique-de-chambre.html">Musique de chambre</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+
+  <!-- À propos -->
+  <section id="apropos">
+    <h2>À propos de l'association</h2>
+    <p>Créée à Chaville en 1998, ACCORDS MAJEURS est une association dynamique dont l’objectif est de regrouper des adultes chanteurs, musiciens, danseurs ou comédiens amateurs, désirant mettre en commun leur savoir-faire sous forme d’ateliers collectifs, ou désirant s’initier ou se perfectionner dans leurs domaines respectifs.</p>
+  </section>
+
+  <!-- Activités -->
+  <section id="activites">
+    <h2>Nos activités</h2>
+    <p>Concerts, ateliers, musique de chambre, partenariats avec les conservatoires de Meudon et Ville-d'Avray…</p>
+  </section>
+
+  <!-- Événements -->
+  <section id="evenements">
+    <h2>Prochains événements</h2>
+    <p>Retrouvez ici notre programme de concerts et autres rendez-vous musicaux.</p>
+  </section>
+  
+  <!-- Actualités -->
+<section id="actualites">
+  <h2>Actualités et agenda</h2>
+
+  <!-- sans attribut data-date -->
+  <!--
+  <article class="actus-item">
+    <h3>🎶 Concert de printemps – 12 avril 2025</h3>
+    <p>L’orchestre d’Accords Majeurs vous invite à un concert autour de Brahms et Fauré, à l’auditorium de Chaville.</p>
+  </article>
+
+  <article class="actus-item">
+    <h3>🎻 Masterclass de musique de chambre – 4 mai 2025</h3>
+    <p>Ouverte aux membres de l’association, cette masterclass est encadrée par des musiciens professionnels des conservatoires partenaires.</p>
+  </article>
+
+  <article class="actus-item">
+    <h3>📣 Assemblée générale – 15 juin 2025</h3>
+    <p>Rendez-vous à 18h pour échanger sur les projets à venir, le bilan de la saison et les orientations futures.</p>
+  </article>
+  -->
+  <!-- avec attribut data-date -->
+  <article class="actus-item" data-date="2025-04-12">
+  <h3>🎶 Concert de printemps – 12 avril 2025</h3>
+  <p>L’orchestre d’Accords Majeurs vous invite à un concert autour de Brahms et Fauré.</p>
+</article>
+
+<article class="actus-item" data-date="2025-05-04">
+  <h3>🎻 Masterclass de musique de chambre – 4 mai 2025</h3>
+  <p>Encadrée par des professionnels des conservatoires partenaires.</p>
+</article>
+
+<article class="actus-item" data-date="2025-09-15">
+  <h3>📣 Assemblée générale – 15 septembre 2025</h3>
+  <p>Bilan de saison et échanges sur les projets à venir.</p>
+</article>
+
+ <article class="actus-item" data-date="2026-04-22">
+  <h3>🎶 Concert de printemps – 22 mars 2026</h3>
+  <p>L’orchestre d’Accords Majeurs vous invite à un concert autour de Gerschwin et Schumann.</p>
+</article>
+
+ <article class="actus-item" data-date="2026-06-30">
+  <h3>🎶 Concert de fin d'année – 30juin 2026</h3>
+  <p>L’orchestre d’Accords Majeurs vous invite à un concert autour de Haydn et Mozart.</p>
+</article>
+
+<article class="actus-item" data-date="2025-04-20">
+  <h3>🎻 Masterclass classe de piano – 20 avril 2025</h3>
+  <p>Encadrée par des professionnels des conservatoires partenaires.</p>
+</article>
+
+
+<!--bouton "Afficher les actualités passées" -->
+<button id="toggle-past" style="margin-top: 1rem;">Afficher les actualités passées</button>
+
+
+</section>
+
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Pour nous écrire : <a href="mailto:contact@accordsmajeurs.com">contact@accordsmajeurs.com</a></p>
+  </section>
+
+  <!-- Pied de page -->
+  <footer>
+    <p>&copy; 2025 Accords Majeurs. Tous droits réservés.</p>
+  </footer>
+
+</body>
+</html>

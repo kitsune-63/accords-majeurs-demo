@@ -1,56 +1,51 @@
-/* Import d'une belle typographie Google Fonts */
+/* Typographie élégante */
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 
 :root {
   --couleur-principale: #2c2c2c;
   --couleur-secondaire: #a8875c;
-  --couleur-fond: #f9f9f9;
+  --fond-clair: #f9f9f9;
   --police: 'Libre Baskerville', serif;
 }
 
 body {
   margin: 0;
   font-family: var(--police);
-  background-color: var(--couleur-fond);
+  background-color: var(--fond-clair);
   color: var(--couleur-principale);
   line-height: 1.6;
 }
 
+/* EN-TÊTE */
 header {
   background: url("header.jpg") no-repeat center center/cover;
   color: white;
-  padding: 4rem 2rem;
   text-align: center;
+  padding: 4rem 2rem;
   position: relative;
 }
 
 header::before {
   content: "";
-  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 0;
 }
 
-header h1 {
-  position: relative;
-  font-size: 2.5rem;
-  margin: 0;
-  z-index: 1;
-}
-
+header h1,
 nav {
   position: relative;
-  z-index: 1;
-  margin-top: 1rem;
+  z-index: 10;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
+.logo {
+  max-width: 120px;
+  margin-bottom: 1rem;
 }
+
+/* MENU */
+
 
 nav a {
   color: white;
@@ -63,17 +58,20 @@ nav a:hover {
   color: var(--couleur-secondaire);
 }
 
+/* SECTIONS */
 section {
-  padding: 3rem 2rem;
   max-width: 900px;
-  margin: 0 auto;
+  margin: 3rem auto;
+  padding: 0 2rem;
 }
 
 section h2 {
   color: var(--couleur-secondaire);
   margin-top: 0;
+  font-size: 1.8rem;
 }
 
+/* PIED DE PAGE */
 footer {
   background-color: var(--couleur-principale);
   color: white;
@@ -82,13 +80,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Logo */
-.logo {
-  max-width: 120px;
-  margin-bottom: 1rem;
-}
-
-/* Responsive */
+/* RESPONSIVE */
 @media (max-width: 600px) {
   nav ul {
     flex-direction: column;
@@ -96,6 +88,259 @@ footer {
   }
 
   header h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
+}
+#actualites {
+  background-color: #f9f9f9;
+  border-top: 1px solid #ccc;
+  padding-top: 2rem;
+}
+
+.actus-item {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--couleur-secondaire);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.actus-item h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: var(--couleur-principale);
+}
+
+.actus-item p {
+  margin: 0.5rem 0 0;
+}
+.past-event {
+  opacity: 0.7;
+  font-style: italic;
+}
+/* Animation d’apparition douce */
+.past-event {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.6s ease, max-height 0.6s ease;
+}
+
+/* Quand l’élément est visible */
+.past-event.visible {
+  opacity: 1;
+  max-height: 500px; /* Assez pour laisser passer le contenu */
+}
+
+/* Style amélioré du bouton */
+#toggle-past {
+  background-color: var(--couleur-secondaire);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2rem auto 0;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+#toggle-past:hover {
+  background-color: #8c6d45;
+}
+/* Positionnement du menu principal */
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  position: relative;
+}
+
+/* Menu déroulant (sous-menu) */
+nav .has-submenu {
+  position: relative;
+}
+
+nav .submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--couleur-principale);
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  min-width: 160px;
+}
+
+nav .submenu li {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+nav .submenu li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: white;
+  text-decoration: none;
+}
+
+nav .submenu li a:hover {
+  background-color: var(--couleur-secondaire);
+}
+
+/* Affichage du sous-menu au survol */
+nav .has-submenu:hover .submenu {
+  display: block;
+}
+nav {
+  background-color: var(--couleur-principale);
+  position: relative;
+  z-index: 10;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem; /* pour donner de l'espace vertical */
+  margin: 0; /* on enlève la marge du haut */
+  position: relative;
+}
+/* Section directeur */
+
+/*
+.directeur {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.directeur-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.directeur-photo {
+  max-width: 200px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.directeur-content p {
+  text-align: justify;
+}
+*/
+/* Bloc directeur plus étroit et texte justifié */
+.directeur {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.directeur-wrap {
+  text-align: justify;
+}
+
+.directeur-photo {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  float: left;
+  margin: 0 1.5rem 1rem 0;
+  border-radius: 6px;
+}
+
+.directeur-content p {
+  text-align: justify;
+}
+.actus-affiche {
+  max-width: 200px; /* ou la taille que tu veux */
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.actus-affiche:hover {
+  transform: scale(1.05);
+}
+.actus-item {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--couleur-secondaire);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.actus-flex {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap; /* Pour que ça reste beau sur mobile */
+}
+
+.actus-affiche {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.actus-affiche:hover {
+  transform: scale(1.05);
+}
+
+.actus-texte {
+  flex: 1; /* prend tout l'espace restant */
+}
+
+.actus-texte p {
+  margin: 0.5rem 0 0;
+  text-align: justify;
+}
+.mediatheque {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.mediatheque audio,
+.mediatheque iframe {
+  display: block;
+  margin: 1rem 0;
+  max-width: 100%;
+  
+}.mediatheque {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.mediatheque-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.mediatheque-photo {
+  max-width: 200px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.mediatheque-content p {
+  text-align: justify;
 }
